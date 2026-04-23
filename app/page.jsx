@@ -60,16 +60,20 @@ export default function Page(){
       <div style={{marginBottom:48,paddingBottom:28,borderBottom:`1px solid ${C.border}`}}>
         <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:8}}>
           <div style={{width:8,height:8,borderRadius:"50%",background:C.accent}}/>
-          <span style={{fontSize:11,fontWeight:700,textTransform:"uppercase",letterSpacing:1.5,color:C.dim}}>RevOps · BDR Performance</span>
+          <span style={{fontSize:11,fontWeight:700,textTransform:"uppercase",letterSpacing:1.5,color:C.dim}}>RevOps · Enterprise BDR Performance</span>
         </div>
         <h1 style={{fontSize:32,fontWeight:800,letterSpacing:-0.5,margin:"0 0 6px",color:C.text}}>BDR outreach report</h1>
         <p style={{fontSize:15,color:C.muted,margin:0}}>Rolling 30 days — April 23, 2026</p>
       </div>
 
       {/* KPIs */}
-      <SL>Team totals — cold outreach only</SL>
-      <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:14,marginBottom:48}}>
-        {[{l:"Contacts actioned",n:"856",s:"343 companies"},{l:"Replies",n:"84",s:"9.8% reply rate"},{l:"Meetings booked",n:"25",s:"BDR-sourced"},{l:"Meetings held",n:"14",s:"56% hold rate"}].map((k,i)=>(
+      <SL>Team totals</SL>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:14,marginBottom:48}}>
+        {[
+          {l:"Contacts actioned",n:"856",s:"343 companies"},
+          {l:"Replies",n:"84",s:"9.8% reply rate"},
+          {l:"Meetings booked",n:"41",s:"25 BDR-sourced · 16 AE-assisted"},
+        ].map((k,i)=>(
           <div key={i} style={{background:"rgba(255,255,255,0.025)",border:`1px solid ${C.border}`,borderRadius:12,padding:"20px 24px"}}>
             <div style={{fontSize:13,color:C.muted,marginBottom:8}}>{k.l}</div>
             <div style={{fontSize:30,fontWeight:800,lineHeight:1,color:C.text}}>{k.n}</div>
@@ -82,44 +86,90 @@ export default function Page(){
       <SL>Two outreach motions</SL>
       <Card style={{marginBottom:24,padding:"20px 24px"}}>
         <p style={{fontSize:14,color:C.muted,lineHeight:1.7,margin:0}}>
-          The BDR team operates in <strong style={{color:C.text,fontWeight:600}}>two distinct motions</strong>: high-volume cold prospecting (Joe, Taner) and AE-supported warm outreach (Jennie, Carter). Both create value differently — below we break them out so each motion is measured fairly.
+          The Enterprise BDR team operates in <strong style={{color:C.text,fontWeight:600}}>two distinct motions</strong>. 
+          Joe and Taner focus exclusively on <strong style={{color:C.text,fontWeight:600}}>cold prospecting</strong> — high-volume outreach to new accounts with no prior AE involvement. 
+          Jennie and Carter do both: cold outreach on their own accounts <em>and</em> <strong style={{color:C.text,fontWeight:600}}>AE-supported warm outreach</strong> where 
+          Jen Abel or Tom Manatos have established relationships. Below we separate the two motions so each is measured fairly.
         </p>
       </Card>
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:20,marginBottom:48}}>
-        <Card>
-          <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:6}}>
-            <h3 style={{fontSize:17,fontWeight:700,margin:0}}>Cold prospecting</h3>
-            <Badge type="cold">Joe & Taner</Badge>
+
+      {/* Cold Prospecting */}
+      <Card style={{marginBottom:20}}>
+        <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:6}}>
+          <h3 style={{fontSize:17,fontWeight:700,margin:0}}>Cold prospecting</h3>
+          <Badge type="cold">All 4 BDRs</Badge>
+        </div>
+        <p style={{fontSize:13,color:C.muted,marginBottom:6,lineHeight:1.6}}>
+          First-touch outreach to contacts with no prior AE involvement within 30 days. Excludes contacts with existing open deals, prior intro meetings, and AE-sourced contacts.
+        </p>
+        <p style={{fontSize:12,color:C.dim,marginBottom:20,lineHeight:1.5,fontStyle:"italic"}}>
+          Note: Joe and Taner recently joined the Enterprise team. Joe started approximately one week before Taner, which accounts for the difference in volume.
+        </p>
+        <table style={{width:"100%",borderCollapse:"collapse"}}>
+          <thead><tr>
+            <th style={{...th,textAlign:"left"}}>BDR</th>
+            <th style={{...th,textAlign:"right"}}>Contacts actioned</th>
+            <th style={{...th,textAlign:"right"}}>Companies</th>
+            <th style={{...th,textAlign:"right"}}>Replied</th>
+            <th style={{...th,textAlign:"right"}}>Reply %</th>
+            <th style={{...th,textAlign:"right"}}>Meetings</th>
+            <th style={{...th,textAlign:"right"}}>Interest %</th>
+          </tr></thead>
+          <tbody>
+            {[
+              {n:"Joseph Reed",a:379,co:143,r:16,rr:"4.2%",m:5,ir:"1.3%",rrCol:C.muted},
+              {n:"Jennie Chasseur",a:198,co:48,r:36,rr:"18.2%",m:12,ir:"6.1%",rrCol:C.green},
+              {n:"Taner Bennerson",a:155,co:89,r:5,rr:"3.2%",m:1,ir:"0.6%",rrCol:C.muted},
+              {n:"Carter Phillips",a:124,co:63,r:27,rr:"21.8%",m:8,ir:"6.5%",rrCol:C.green},
+            ].map((r,i)=>(
+              <tr key={i}>
+                <td style={{...td,fontWeight:600}}>{r.n}</td>
+                <td style={{...td,textAlign:"right"}}>{r.a}</td>
+                <td style={{...td,textAlign:"right",color:C.muted}}>{r.co}</td>
+                <td style={{...td,textAlign:"right"}}>{r.r}</td>
+                <td style={{...td,textAlign:"right",color:r.rrCol}}>{r.rr}</td>
+                <td style={{...td,textAlign:"right"}}>{r.m}</td>
+                <td style={{...td,textAlign:"right",color:r.rrCol}}>{r.ir}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Card>
+
+      {/* AE-Supported */}
+      <Card style={{marginBottom:48}}>
+        <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:6}}>
+          <h3 style={{fontSize:17,fontWeight:700,margin:0}}>AE-supported outreach</h3>
+          <Badge type="warm">Jennie & Carter</Badge>
+        </div>
+        <p style={{fontSize:13,color:C.muted,marginBottom:20,lineHeight:1.6}}>
+          In addition to their cold outreach above, Jennie and Carter also work accounts where Jen Abel or Tom Manatos have 
+          established relationships. These contacts are excluded from the cold metrics above and reported separately here.
+        </p>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:20}}>
+          <div style={{background:"rgba(255,255,255,0.02)",borderRadius:10,padding:"16px 20px",border:`1px solid ${C.border}`}}>
+            <div style={{fontSize:14,fontWeight:700,marginBottom:4}}>Jennie Chasseur</div>
+            <div style={{fontSize:13,color:C.muted,lineHeight:1.7}}>
+              <span style={{color:C.text,fontWeight:600}}>+27</span> additional contacts · <span style={{color:C.text,fontWeight:600}}>+17</span> additional replies · <span style={{color:C.text,fontWeight:600}}>+10</span> additional interested
+            </div>
           </div>
-          <p style={{fontSize:13,color:C.muted,marginBottom:20,lineHeight:1.6}}>High-volume outreach to new accounts with no prior AE involvement. Every meeting is 100% BDR-sourced.</p>
-          <table style={{width:"100%",borderCollapse:"collapse"}}>
-            <thead><tr><th style={{...th,textAlign:"left"}}>BDR</th><th style={{...th,textAlign:"right"}}>Actioned</th><th style={{...th,textAlign:"right"}}>Replied</th><th style={{...th,textAlign:"right"}}>Reply %</th><th style={{...th,textAlign:"right"}}>Meetings</th></tr></thead>
-            <tbody>
-              {[{n:"Joseph Reed",a:379,r:16,rr:"4.2%",m:5},{n:"Taner Bennerson",a:155,r:5,rr:"3.2%",m:1}].map((r,i)=>(
-                <tr key={i}><td style={{...td,fontWeight:600}}>{r.n}</td><td style={{...td,textAlign:"right"}}>{r.a}</td><td style={{...td,textAlign:"right"}}>{r.r}</td><td style={{...td,textAlign:"right",color:C.muted}}>{r.rr}</td><td style={{...td,textAlign:"right"}}>{r.m}</td></tr>
-              ))}
-            </tbody>
-          </table>
-        </Card>
-        <Card>
-          <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:6}}>
-            <h3 style={{fontSize:17,fontWeight:700,margin:0}}>AE-supported outreach</h3>
-            <Badge type="warm">Jennie & Carter</Badge>
+          <div style={{background:"rgba(255,255,255,0.02)",borderRadius:10,padding:"16px 20px",border:`1px solid ${C.border}`}}>
+            <div style={{fontSize:14,fontWeight:700,marginBottom:4}}>Carter Phillips</div>
+            <div style={{fontSize:13,color:C.muted,lineHeight:1.7}}>
+              <span style={{color:C.text,fontWeight:600}}>+16</span> additional contacts · <span style={{color:C.text,fontWeight:600}}>+12</span> additional replies · <span style={{color:C.text,fontWeight:600}}>+5</span> additional interested
+            </div>
           </div>
-          <p style={{fontSize:13,color:C.muted,marginBottom:20,lineHeight:1.6}}>Working accounts where Jen Abel or Tom Manatos have established relationships. Higher reply rates reflect warm introductions.</p>
-          <table style={{width:"100%",borderCollapse:"collapse"}}>
-            <thead><tr><th style={{...th,textAlign:"left"}}>BDR</th><th style={{...th,textAlign:"right"}}>Actioned</th><th style={{...th,textAlign:"right"}}>Replied</th><th style={{...th,textAlign:"right"}}>Reply %</th><th style={{...th,textAlign:"right"}}>Meetings</th></tr></thead>
-            <tbody>
-              {[{n:"Jennie Chasseur",a:198,r:36,rr:"18.2%",m:12},{n:"Carter Phillips",a:124,r:27,rr:"21.8%",m:8}].map((r,i)=>(
-                <tr key={i}><td style={{...td,fontWeight:600}}>{r.n}</td><td style={{...td,textAlign:"right"}}>{r.a}</td><td style={{...td,textAlign:"right"}}>{r.r}</td><td style={{...td,textAlign:"right",color:C.green}}>{r.rr}</td><td style={{...td,textAlign:"right"}}>{r.m}</td></tr>
-              ))}
-            </tbody>
-          </table>
-        </Card>
-      </div>
+        </div>
+      </Card>
 
       {/* Meeting Attribution */}
       <SL>Meeting attribution</SL>
+      <Card style={{marginBottom:20,padding:"20px 24px"}}>
+        <p style={{fontSize:14,color:C.muted,lineHeight:1.6,margin:0}}>
+          Meetings are classified based on whether an AE (Tom Manatos or Jen Abel) emailed the contact within 30 days before the BDR's first outreach. 
+          "AE-assisted" means the AE warmed the relationship first — the BDR still did the work to book the meeting.
+        </p>
+      </Card>
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:20,marginBottom:48}}>
         <Card>
           <div style={{display:"flex",alignItems:"baseline",gap:10,marginBottom:20}}>
@@ -165,7 +215,9 @@ export default function Page(){
 
       <Card style={{marginBottom:20,padding:"20px 24px"}}>
         <p style={{fontSize:14,color:C.muted,lineHeight:1.6,margin:0}}>
-          Cold prospecting naturally targets a <strong style={{color:C.text,fontWeight:600}}>wider ICP range</strong> — Joe and Taner work 70 accounts each at lower average scores. Jennie and Carter work fewer, higher-scored accounts, many introduced by AEs. This is expected and reflects the different motions.
+          Cold prospecting naturally targets a <strong style={{color:C.text,fontWeight:600}}>wider ICP range</strong> — Joe and Taner work 70 accounts each at lower average scores. 
+          Jennie and Carter work fewer, higher-scored accounts in their cold outreach, and their AE-supported accounts tend to score even higher. 
+          This is expected and reflects the different motions.
         </p>
       </Card>
 
